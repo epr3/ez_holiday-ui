@@ -1,11 +1,12 @@
 import React from 'react';
 
 import AuthLayout from '../layouts/AuthLayout';
+import Calendar from '../components/Calendar';
 
 function Home() {
   return (
     <AuthLayout>
-      <p>Home</p>
+      <Calendar />
     </AuthLayout>
   );
 }
