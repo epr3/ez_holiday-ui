@@ -82,7 +82,7 @@ function Calendar() {
   });
 
   return (
-    <Pane display="flex" flex={1} flexDirection="column" padding={16}>
+    <Pane display="flex" flex={1} flexDirection="column" padding={window.innerWidth > 600 ? 16 : 0}>
       <CalendarHeader
         currentDateTime={dt}
         nextMonthAction={nextMonth}

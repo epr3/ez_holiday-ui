@@ -12,12 +12,12 @@ function AuthLayout({ children }) {
           <Heading size={600}>EZ Holiday</Heading>
         </Pane>
         <Pane>
-          <Button marginRight={16} onClick={() => logout()}>
+          <Button onClick={() => logout()}>
             Log out
           </Button>
         </Pane>
       </Pane>
-      <Pane display="flex" padding={16}>
+      <Pane display="flex">
         {children}
       </Pane>
     </>
