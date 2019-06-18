@@ -17,13 +17,17 @@ function Calendar() {
   };
 
   const buildCalendar = () => {
+    const currentDate = DateTime.local();
     const startOfMonth = dt.startOf('month');
     const daysInMonth = [];
 
     for (let i = 1; i <= dt.daysInMonth; i++) {
+      const currentDayCondition =
+        currentDate.hasSame(startOfMonth.plus({ days: i - 1 }), 'month') &&
+        currentDate.day === startOfMonth.plus({ days: i - 1 }).day;
       daysInMonth.push(
         <Table.TextCell
-          background={dt.day === i ? 'redTint' : ''}
+          background={currentDayCondition ? 'redTint' : ''}
           key={`day-${i}`}
         >
           {i}
