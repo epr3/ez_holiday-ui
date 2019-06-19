@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Pane, Text, Icon } from 'evergreen-ui';
+import { Pane, Button, IconButton } from 'evergreen-ui';
 
 function CalendarHeader({
   currentDateTime,
@@ -8,10 +8,10 @@ function CalendarHeader({
   previousMonthAction
 }) {
   return (
-    <Pane display="flex" padding={16}>
-      <Icon icon="chevron-left" onClick={previousMonthAction} />
-      <Text>{currentDateTime.monthLong}</Text>
-      <Icon icon="chevron-right" onClick={nextMonthAction} />
+    <Pane display="flex" justifyContent="center" padding={16}>
+      <IconButton icon="chevron-left" onClick={previousMonthAction} />
+      <Button appearance="minimal">{currentDateTime.monthLong}</Button>
+      <IconButton icon="chevron-right" onClick={nextMonthAction} />
     </Pane>
   );
 }

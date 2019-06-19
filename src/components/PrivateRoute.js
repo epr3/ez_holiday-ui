@@ -1,18 +1,21 @@
 import React from 'react';
-import { Redirect } from '@reach/router';
+import { Redirect, Route } from 'react-router-dom';
+
+const isAuth = !!localStorage.getItem(process.env.REACT_APP_ACCESS_TOKEN_PATH);
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const isAuth = !!localStorage.getItem(
-    process.env.REACT_APP_ACCESS_TOKEN_PATH
+  return (
+    <Route
+      {...rest}
+      render={props =>
+        isAuth ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to="/login" />
+        )
+      }
+    />
   );
-
-  const render = isAuth ? (
-    <Component {...rest} />
-  ) : (
-    <Redirect from="" to="/login" noThrow />
-  );
-
-  return render;
 }
 
 export default PrivateRoute;

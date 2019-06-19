@@ -1,5 +1,5 @@
 import { thunk } from 'easy-peasy';
-import { navigate } from '@reach/router';
+import history from '../lib/history'
 
 import { API } from './index';
 
@@ -11,10 +11,10 @@ export default {
       process.env.REACT_APP_ACCESS_TOKEN_PATH,
       response.data.access_token
     );
-    navigate('/', { replace: true });
+    history.replace('/');
   }),
   logout: thunk(() => {
     localStorage.removeItem(process.env.REACT_APP_ACCESS_TOKEN_PATH);
-    navigate('/login', { replace: true });
+    history.replace('/login');
   })
 };
