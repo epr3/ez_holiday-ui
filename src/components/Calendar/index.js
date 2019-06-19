@@ -4,19 +4,23 @@ import { Pane, Table } from 'evergreen-ui';
 
 import CalendarHeader from './CalendarHeader';
 
+const generateBlanks = range => {
+  const blanks = [];
+  for (let i = 1; i < range; i++) {
+    blanks.push(<Table.TextCell key={`empty-${i}`} />);
+  }
+  return blanks;
+};
+
+const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(item => (
+  <Table.TextHeaderCell key={item}>{item}</Table.TextHeaderCell>
+));
+
 function Calendar() {
   const [dt, setDt] = useState(DateTime.local());
   const [table, setTable] = useState([]);
 
-  const generateBlanks = range => {
-    const blanks = [];
-    for (let i = 1; i < range; i++) {
-      blanks.push(<Table.TextCell key={`empty-${i}`} />);
-    }
-    return blanks;
-  };
-
-  const buildCalendar = () => {
+  const buildCalendar = dt => {
     const currentDate = DateTime.local();
     const startOfMonth = dt.startOf('month');
     const daysInMonth = [];
@@ -73,16 +77,17 @@ function Calendar() {
     setDt(dt.minus({ months: 1 }));
   };
 
-  const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(item => (
-    <Table.TextHeaderCell key={item}>{item}</Table.TextHeaderCell>
-  ));
-
   useEffect(() => {
-    buildCalendar();
-  });
+    buildCalendar(dt);
+  }, [dt]);
 
   return (
-    <Pane display="flex" flex={1} flexDirection="column" padding={window.innerWidth > 600 ? 16 : 0}>
+    <Pane
+      display="flex"
+      flex={1}
+      flexDirection="column"
+      padding={window.innerWidth > 600 ? 16 : 0}
+    >
       <CalendarHeader
         currentDateTime={dt}
         nextMonthAction={nextMonth}
