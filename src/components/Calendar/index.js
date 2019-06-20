@@ -52,7 +52,7 @@ const buildCalendar = dt => {
       rows.push(cells);
     }
   });
-  console.log('here');
+
   return rows.map((d, i) => (
     <Table.Row key={`row-${i}`} justifyContent="flex-start">
       {d}
