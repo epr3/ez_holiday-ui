@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React  from 'react';
 import useForm from 'react-hook-form';
 import { useStoreActions } from 'easy-peasy';
 import { Card, TextInputField, Heading, Button } from 'evergreen-ui';
@@ -7,13 +7,11 @@ import GuestLayout from '../layouts/GuestLayout';
 
 function Login() {
   const { register, handleSubmit } = useForm();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const login = useStoreActions(actions => actions.auth.login);
 
-  const onSubmit = data => {
-    login(data);
+  const onSubmit = async data => {
+    await login(data);
   };
 
   return (
@@ -36,16 +34,12 @@ function Login() {
             name="email"
             type="email"
             placeholder="test@test.com"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
             innerRef={register}
           />
           <TextInputField
             label="Password"
             name="password"
             type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
             innerRef={register}
           />
           <Button type="submit" appearance="primary">
