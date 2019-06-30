@@ -7,11 +7,11 @@ export default {
   authLoading: false,
   login: thunk(async (_, payload) => {
     const response = await API.postLogin(payload);
-    localStorage.setItem(
+    await localStorage.setItem(
       process.env.REACT_APP_ACCESS_TOKEN_PATH,
       response.data.access_token
     );
-    history.replace('/');
+    await history.replace('/');
   }),
   logout: thunk(() => {
     localStorage.removeItem(process.env.REACT_APP_ACCESS_TOKEN_PATH);
